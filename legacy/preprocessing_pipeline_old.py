@@ -28,6 +28,7 @@ class PreprocessingPipeline:
         
         timestamps = self.data['behavior']['behavior']['timestamps'][0][0]
         timestamps = self.data['behavior']['behavior']['timestamps'][0][0]
+        print(timestamps)
         mask = (timestamps > start_time) & (timestamps < stop_time)
         filtered_behavior = {
             'timestamps': timestamps[mask],
@@ -120,7 +121,7 @@ class PreprocessingPipeline:
     
     def apply_dimensionality_reduction(self):
         """Apply dimensionality reduction using the selected strategy."""
-        self.data['embedding'] = self.reducer.fit_transform(self.data['spike_augmented'])
+        self.data['embedding'] = self.reducer.fit_transform(self.data['spike_smoothed'])
         return self
     
     def preprocess(self):
